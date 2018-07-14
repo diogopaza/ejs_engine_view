@@ -10,3 +10,7 @@ para acessar a pasta cd ejs
 ele ira criar o package.json 
 
 3-logo após iremos instalar nossos pacotes que serão usados em nossa aplicação
+
+npm i express ejs express-ejs-layouts faker body-parser --save
+
+4-
