@@ -29,12 +29,10 @@ users = [{
     router.get('/about', (req, res) => {
         
         
-        res.render('../pages/about', { usuarios: users })
-    
-    
+        res.render('../pages/about')
      })
 
-     router.get('/contact', (req, res) => {
+     router.post('/contact', (req, res) => {
          res.send('Obrigado por entrar em ccontato conosco, ' + req.body.name + ' !Responderemos em breve!')
      })
 
