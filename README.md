@@ -30,13 +30,64 @@ app.set('view engine', 'ejs')
 app.set('views','./views/pages')
 //NOSSO BODYPARSER QUE CONVERTE NOSSOS DADOS DA NOSSA REQUISIÇÃO
 app.use(bodyParser.urlencoded({ extended:true }))
-
+//SUBIMOS NOSSO SERVIDOR PARA FICAR ESCUTANDO NA PORTA 3000
 app.listen(3000, function(){
     console.log('servidor rodando na 3000 ')
 })
-
-index = require('./routes/index')
+//SETAMOS PARA QUANDO OUVER UMA REQUISIÇÃO NA '/' ELA SEJA REENCAMINHADA PARA NOSSA INDEX NA PASTA ROUTES
+ index = require('./routes/index')
 app.use('/', index)
 
 
 module.exports = app
+
+6-PARA FINALIZAR CRIAR UM ARQUIVO INDEX NA PASA ROUTES
+
+//IMPORTANDO NOSSOS MODULOS
+var express = require('express')
+var router = express.Router()
+var faker = require('faker')
+
+//NOSSO ARRAY DE USUARIOS, INTERESSANTE NOTR O USO DO FAKER QUE CRIA NOMES PARA TESTE
+users = [{
+    name: 'Gato Lindo',
+    email: faker.internet.email(),
+    avatar: 'http://placekitten.com/300/300'
+},{
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    avatar: 'http://placekitten.com/400/300'
+
+},{
+    name: faker.name.findName(),
+    email: faker.internet.email(),
+    avatar: 'http://placekitten.com/500/300'
+
+}]
+
+
+
+//NOSSAS ROTAS USANDO O ROUTER DO EXPRESS NOTAR QUE PASSAMOS NOSSO ARRAY DE USERS COMO PARAMETRO QUE 
+SERA RECEBIDO NO NOSSO FRONT-END EJS
+    router.get('/', (req, res) => {
+
+        res.render('../pages/home', {usuarios: users})
+    })
+
+    router.get('/about', (req, res) => {
+        
+        
+        res.render('../pages/about')
+     })
+
+     router.post('/contact', (req, res) => {
+         res.send('Obrigado por entrar em ccontato conosco, ' + req.body.name + ' !Responderemos em breve!')
+     })
+
+
+
+
+    
+module.exports = router
+
+
