@@ -13,4 +13,30 @@ ele ira criar o package.json
 
 npm i express ejs express-ejs-layouts faker body-parser --save
 
-4-
+4-Criar um arquivo server.js inicialiando as variáveis necessárias
+
+var express = require('express')
+var faker = require('faker')
+var bodyParser = require('body-parser')
+var expressLayouts = require('express-ejs-layouts')
+var app = express()
+var port = 3000 
+
+5- Depois terminamos de configurar nosso server.js
+
+//AQUI SETAMOS NOSSO ENGINE DE VIEW PARA USAR O EJS
+app.set('view engine', 'ejs')
+//AGORA SETAMOS ONDE BUSCAR NOSSAS VIEWS
+app.set('views','./views/pages')
+//NOSSO BODYPARSER QUE CONVERTE NOSSOS DADOS DA NOSSA REQUISIÇÃO
+app.use(bodyParser.urlencoded({ extended:true }))
+
+app.listen(3000, function(){
+    console.log('servidor rodando na 3000 ')
+})
+
+index = require('./routes/index')
+app.use('/', index)
+
+
+module.exports = app
